@@ -40,13 +40,15 @@ module.exports = class Snok
                     self._examine item
 
     _examine: (item) =>
+        item.guid = item.link if not item.guid
         return if item.guid in @checkedItems
 
         @checkedItems.shift() if @checkedItems.length > @MAX_SAVED_ITEMS
         @checkedItems.push item.guid
 
         containsTrigger = false
-        text = item.title.toLowerCase() + item.description?.toLowerCase() # Not every item has description
+        text = item.title?.toLowerCase() or '' 
+        text += item.description?.toLowerCase() or ''
 
         for trigger in @triggers
             if text.includes trigger
