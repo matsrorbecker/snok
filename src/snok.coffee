@@ -3,6 +3,8 @@ FeedParser =    require 'feedparser'
 
 module.exports = class Snok
 
+    MAX_SAVED_ITEMS: 1000
+
     constructor: (@feeds, @triggers, @callback, @log = false) ->
         @checkedItems = []
 
@@ -40,7 +42,7 @@ module.exports = class Snok
     _examine: (item) =>
         return if item.guid in @checkedItems
 
-        @checkedItems.shift() if @checkedItems.length > 100
+        @checkedItems.shift() if @checkedItems.length > @MAX_SAVED_ITEMS
         @checkedItems.push item.guid
 
         containsTrigger = false
