@@ -1,5 +1,4 @@
 node_modules
 *.sublime-workspace
 *.sublime-project
-*.js
 test.coffee
