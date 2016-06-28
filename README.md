@@ -8,7 +8,7 @@ Installation
 
 First you need to install [Node.js](https://nodejs.org/). After that, run the following command:
 
-    npm install matsrorbecker/snok
+    npm install snok
 
 Usage
 -----
