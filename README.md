@@ -9,6 +9,36 @@ Installation
 First you need to install [Node.js](https://nodejs.org/). After that, run the following command:
 
     npm install matsrorbecker/snok
+
+Usage
+-----
+Just pass Snok the feeds, the triggers and a callback to handle the returned items. Example:
+
+```javascript
+const Snok = require('snok');
+
+const feeds = [
+	'https://news.ycombinator.com/rss'
+]
+
+const triggers = [
+	'machine learning',
+	'artificial intelligence',
+	'automation'
+]
+
+const notify = function (item) {
+	console.log("Hey, there seems to be an interesting article out there!");
+	console.log(item.link);
+}
+
+const secondsBetweenChecks = 60;
+
+const snok = new Snok(feeds, triggers, notify);
+
+setInterval(snok.sniff, secondsBetweenChecks * 1000);
+snok.sniff();
+```
     
 License
 -------
