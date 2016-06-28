@@ -1,6 +1,6 @@
 {
   "name": "snok",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A super simple RSS sniffer",
   "main": "snok.js",
   "scripts": {
