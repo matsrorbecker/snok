@@ -87,7 +87,7 @@
       ref3 = this.triggers;
       for (i = 0, len = ref3.length; i < len; i++) {
         trigger = ref3[i];
-        if (text.includes(trigger)) {
+        if (text.includes(trigger.toLowerCase())) {
           containsTrigger = true;
           break;
         }

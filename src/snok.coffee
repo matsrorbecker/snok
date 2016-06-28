@@ -51,7 +51,7 @@ module.exports = class Snok
         text += item.description?.toLowerCase() or ''
 
         for trigger in @triggers
-            if text.includes trigger
+            if text.includes trigger.toLowerCase()
                 containsTrigger = true
                 break
 
