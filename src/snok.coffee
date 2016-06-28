@@ -26,15 +26,15 @@ module.exports = class Snok
         request
             .get options
             .on 'error', (error) ->
-                console.error error if @log
+                console.error error if self.log
             .on 'response', (response) ->
                 unless response.statusCode is 200
-                    console.error "Server responded with #{response.statusCode}..." if @log
+                    console.error "Server responded with #{response.statusCode}..." if self.log
             .pipe feedParser
 
         feedParser
             .on 'error', (error) ->
-                console.error error if @log
+                console.error error if self.log
             .on 'readable', () ->
                 while item = @read()
                     self._examine item

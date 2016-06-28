@@ -45,18 +45,18 @@
         }
       };
       request.get(options).on('error', function(error) {
-        if (this.log) {
+        if (self.log) {
           return console.error(error);
         }
       }).on('response', function(response) {
         if (response.statusCode !== 200) {
-          if (this.log) {
+          if (self.log) {
             return console.error("Server responded with " + response.statusCode + "...");
           }
         }
       }).pipe(feedParser);
       return feedParser.on('error', function(error) {
-        if (this.log) {
+        if (self.log) {
           return console.error(error);
         }
       }).on('readable', function() {
