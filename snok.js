@@ -23,11 +23,11 @@
     }
 
     Snok.prototype.sniff = function() {
-      var feed, i, len, ref, results;
+      var feed, j, len, ref, results;
       ref = this.feeds;
       results = [];
-      for (i = 0, len = ref.length; i < len; i++) {
-        feed = ref[i];
+      for (j = 0, len = ref.length; j < len; j++) {
+        feed = ref[j];
         results.push(this._fetchAndParse(feed));
       }
       return results;
@@ -70,7 +70,7 @@
     };
 
     Snok.prototype._examine = function(item) {
-      var containsTrigger, i, len, ref, ref1, ref2, ref3, text, trigger;
+      var containsTrigger, first, i, j, len, ref, ref1, ref2, ref3, second, text, trigger;
       if (!item.guid) {
         item.guid = item.link;
       }
@@ -85,9 +85,17 @@
       text = ((ref1 = item.title) != null ? ref1.toLowerCase() : void 0) || '';
       text += ((ref2 = item.description) != null ? ref2.toLowerCase() : void 0) || '';
       ref3 = this.triggers;
-      for (i = 0, len = ref3.length; i < len; i++) {
-        trigger = ref3[i];
-        if (text.includes(trigger.toLowerCase())) {
+      for (j = 0, len = ref3.length; j < len; j++) {
+        trigger = ref3[j];
+        if (trigger.includes('&&')) {
+          i = trigger.indexOf('&&');
+          first = trigger.substring(0, i).trim().toLowerCase();
+          second = trigger.substring(i + 2).trim().toLowerCase();
+          if (text.includes(first) && text.includes(second)) {
+            containsTrigger = true;
+            break;
+          }
+        } else if (text.includes(trigger.toLowerCase())) {
           containsTrigger = true;
           break;
         }

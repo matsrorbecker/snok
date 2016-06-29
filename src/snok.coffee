@@ -51,7 +51,14 @@ module.exports = class Snok
         text += item.description?.toLowerCase() or ''
 
         for trigger in @triggers
-            if text.includes trigger.toLowerCase()
+            if trigger.includes '&&'
+                i = trigger.indexOf '&&'
+                first = trigger.substring(0, i).trim().toLowerCase()
+                second = trigger.substring(i + 2).trim().toLowerCase()
+                if text.includes(first) and text.includes(second)
+                    containsTrigger = true
+                    break
+            else if text.includes trigger.toLowerCase()
                 containsTrigger = true
                 break
 

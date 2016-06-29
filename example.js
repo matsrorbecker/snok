@@ -7,7 +7,8 @@ const feeds = [
 const triggers = [
 	'machine learning',
 	'artificial intelligence',
-	'automation'
+	'automation',
+	'AI && robotics' // Logical AND now supported
 ]
 
 const notify = function (item) {
