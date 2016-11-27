@@ -7,10 +7,14 @@ module.exports = class Snok
 
     constructor: (@feeds, @triggers, @callback, @log = false) ->
         @checkedItems = []
+        @userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36' 
 
     sniff: () =>
         for feed in @feeds
             @_fetchAndParse(feed)
+
+    setUserAgent: (userAgent) =>
+        @userAgent = userAgent
 
     _fetchAndParse: (feed) =>
         self = @
@@ -20,7 +24,7 @@ module.exports = class Snok
         options =
             url: feed
             headers:
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36'
+                'User-Agent': @userAgent
                 'Accept': 'text/html,application/xhtml+xml'
 
         request

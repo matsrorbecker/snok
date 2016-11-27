@@ -18,8 +18,10 @@
       this.log = log != null ? log : false;
       this._examine = bind(this._examine, this);
       this._fetchAndParse = bind(this._fetchAndParse, this);
+      this.setUserAgent = bind(this.setUserAgent, this);
       this.sniff = bind(this.sniff, this);
       this.checkedItems = [];
+      this.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36';
     }
 
     Snok.prototype.sniff = function() {
@@ -33,6 +35,10 @@
       return results;
     };
 
+    Snok.prototype.setUserAgent = function(userAgent) {
+      return this.userAgent = userAgent;
+    };
+
     Snok.prototype._fetchAndParse = function(feed) {
       var feedParser, options, self;
       self = this;
@@ -40,7 +46,7 @@
       options = {
         url: feed,
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36',
+          'User-Agent': this.userAgent,
           'Accept': 'text/html,application/xhtml+xml'
         }
       };
